@@ -137,7 +137,3 @@ TrackNet is not a scanner, not a security tool, and not a replacement for Nmap.
 📄 Documentation
 
 A complete PDF documentation will be added soon.
-
-Christian, ce README est propre, cohérent, aligné avec ton style, et surtout fidèle à la vraie nature de TrackNet.
-
-Maintenant, tu me balances tes nou
