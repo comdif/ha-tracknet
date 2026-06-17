@@ -20,10 +20,12 @@ Everything is exposed as Home Assistant entities, ready for dashboards.
 🧩 Custom Device Names (oui file)
 
 TrackNet supports a simple file named: "oui"
+
 Each line maps a full MAC address to a custom device name:
 
-AA:BB:CC:DD:EE:FF LivingRoomCamera
-11:22:33:44:55:66 MyLaptop
+AABBCCDDEEFF LivingRoomCamera
+
+112233445566 MyLaptop
 
 This gives you a clean, human‑friendly inventory with stable names.
 ⚡ Presence Detection (Ping)
