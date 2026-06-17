@@ -1,0 +1,90 @@
+title: TrackNet
+path: dashboard-tracknet
+views:
+  - title: TrackNet
+    path: main
+    icon: mdi:lan
+    cards:
+      - type: entities
+        title: TrackNet Status
+        entities:
+          - entity: sensor.tracknet_devices
+            name: Devices Found
+      - show_name: true
+        show_icon: true
+        type: button
+        name: Rescan Now
+        icon: mdi:refresh
+        tap_action:
+          action: call-service
+          service: homeassistant.update_entity
+          target:
+            entity_id: sensor.tracknet_devices
+        icon_height: 50px
+      - type: button
+        name: Full device list
+        icon: mdi:format-list-bulleted
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tracknet/devices
+        icon_height: 50px
+      - type: button
+        name: Update ARP
+        icon: mdi:gesture-tap-hold
+        icon_height: 50px
+        show_state: false
+        show_name: true
+        tap_action:
+          action: none
+        hold_action:
+          action: perform-action
+          perform_action: ssh_command.exec_command
+          data:
+            host: 127.0.0.1
+            port: 22
+            user: root
+            pass: yourpassword
+            command: >-
+              ip neigh flush all; sleep 20; for i in $(seq 1 254); do ping -c1
+              -W1 192.168.20.$i >/dev/null & done; wait
+  - title: Devices
+    path: devices
+    icon: mdi:lan-connect
+    panel: true
+    cards:
+      - type: markdown
+        title: Devices
+        content: >
+          [`? Back`](/dashboard-tracknet/main)
+
+
+          {% set devs = state_attr('sensor.tracknet_raw', 'devices') %}
+
+          {% set web_ports = [80, 443, 8080] %}
+
+
+          |    IP    |    MAC    |    Vendor    |    Ports    |    Ping    |
+
+          |----------------|----------------|----------------|----------------|----------------|
+
+          {% for d in devs %}
+
+            {% set clean_ports = d.ports | reject("in", web_ports) | list %}
+            {% set ports_str = clean_ports | join(' | ') %}
+
+            {% if d.best_port and d.url %}
+              {% set web = "[" ~ d.best_port ~ "](" ~ d.url ~ ")" %}
+            {% else %}
+              {% set web = "-" %}
+            {% endif %}
+
+            {% if d.ping %}
+              {% set ping = "??" %}
+            {% else %}
+              {% set ping = "??" %}
+            {% endif %}
+
+          | {{ d.ip }} | {{ d.mac | replace(":", "") | upper }} | {{ d.vendor }}
+          | {{ ports_str }} | {{ web }} | {{ ping }} |
+
+          {% endfor %}

@@ -1,0 +1,10 @@
+{
+  "domain": "tracknet",
+  "name": "TrackNet",
+  "version": "1.0.0",
+  "documentation": "https://example.com/tracknet",
+  "requirements": [],
+  "codeowners": ["@christian"],
+  "config_flow": true,
+  "iot_class": "local_polling"
+}
