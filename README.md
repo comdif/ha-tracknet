@@ -1,128 +1,105 @@
 ha-tracknet
 
 Local network inventory & device tracker for Home Assistant  
-Simple · Fast · Zero dependencies · Dashboard‑friendly
-📌 Important Notice
+Fast · Local · Zero dependencies · Dashboard‑ready
+🔍 What TrackNet Does
 
-TrackNet is not a network scanner and is not intended for pentesting, reconnaissance, or security auditing.
+TrackNet builds a clean, real‑time inventory of all devices on your LAN by combining:
 
-It is a Home Assistant device tracker, designed to:
+    ARP refresh
 
-    refresh the ARP table
+    Parallel ICMP ping
 
-    detect active devices on the LAN
+    Web port auto‑detection
 
-    maintain a clean network inventory
+    Clickable device URLs
 
-    expose devices as HA entities
+    Custom names via oui file
 
-    provide convenient shortcuts to open device interfaces
+Everything is exposed as Home Assistant entities, ready for dashboards.
+🧩 Custom Device Names (oui file)
 
-All operations are local, non‑intrusive, and designed for home networks.
-🧪 Hardware Used for Testing
+TrackNet supports a simple file named: "oui"
+Each line maps a full MAC address to a custom device name:
 
-All development and validation were performed using:
-✔️ Home Assistant OS (HAOS)
+AA:BB:CC:DD:EE:FF LivingRoomCamera
+11:22:33:44:55:66 MyLaptop
 
-Tested on:
+This gives you a clean, human‑friendly inventory with stable names.
+⚡ Presence Detection (Ping)
+
+For every IP discovered in ARP:
+
+    TrackNet sends a parallel ICMP ping
+
+    Returns a clear state: online / offline
+
+    Updates the HA entity accordingly
+
+Fast, reliable, and perfect for dashboards.
+🌐 Web Interface Detection
+
+TrackNet automatically selects the most likely web port:
+
+    80
+
+    443
+
+    8080
+
+    8123
+
+    etc.
+
+Then it generates a direct clickable URL.
+
+In Home Assistant, clicking it opens the device interface in a new browser tab.
+
+Ideal for routers, switches, cameras, ESPs, APs, printers…
+📊 Home Assistant Output
+
+Each device entry includes:
+
+    IP address
+
+    MAC address
+
+    Custom name (from oui)
+
+    Vendor (if available)
+
+    Ping status
+
+    Best web port
+
+    Clickable URL
+
+All grouped in a single clean sensor, dashboard‑friendly.
+🛠️ Architecture
+
+    Single lightweight script
+
+    Zero dependencies
+
+    Fully local
+
+    Works on HAOS, BusyBox, SSH add‑on
+
+    Executes in a few hundred milliseconds
+
+    Perfect for automations and Lovelace tiles
+
+🧪 Tested On
 
     HAOS x86‑64
 
-    HAOS on Raspberry Pi
+    HAOS Raspberry Pi
 
-    HAOS supervised installations
+    HAOS supervised
 
-Validated with:
+    Standard home LANs (DHCP, Wi‑Fi, wired/wireless mix)
 
-    Official SSH Add‑on
-
-    BusyBox shell
-
-    Python venv for log inspection
-
-This environment was used to test:
-
-    ARP refresh behavior
-
-    parallel ICMP presence detection
-
-    stability over multiple days
-
-    integration with HA dashboards
-
-    compatibility with device trackers
-
-✔️ Standard home network equipment
-
-TrackNet was tested on typical LAN setups:
-
-    consumer routers
-
-    Wi‑Fi access points
-
-    mixed wired/wireless networks
-
-    DHCP‑based addressing
-
-TrackNet is not intended for enterprise networks with NAC, Cisco ISE, IDS/IPS, or NetFlow monitoring.
-📌 Overview
-
-ha-tracknet is a lightweight Home Assistant integration providing:
-
-    a clean inventory of devices on your LAN
-
-    fast presence detection
-
-    ARP table refresh
-
-    parallel ICMP checks
-
-    direct access to device interfaces from dashboards
-
-The design philosophy is:
-
-    simple
-
-    fast
-
-    local
-
-    non‑intrusive
-
-    Home Assistant‑friendly
-
-TrackNet is ideal for:
-
-    maintaining a clean network map
-
-    refreshing device trackers
-
-    detecting new devices
-
-    opening routers, switches, cameras, ESPs, etc. directly from HA
-
-    building dashboards with clickable network tiles
-
-TrackNet is not a scanner, not a security tool, and not a replacement for Nmap.
-✨ Features
-
-    ⚡ Fast presence detection (parallel ICMP)
-
-    🔄 ARP table refresh before detection
-
-    🧼 Clean device list for dashboards
-
-    🖥️ Direct access links to device web interfaces
-
-    🧩 Simple architecture (single script)
-
-    🏠 Fully local (no cloud, no API keys)
-
-    🛠️ Easy to extend
-
-    🧘 Non‑intrusive (no port scanning, no fingerprinting)
-
-🚧 Current Status
+📦 Status
 
     ✔️ Fully working ARP + ICMP presence detection
 
