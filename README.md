@@ -121,7 +121,7 @@ A complete PDF documentation will be added soon.
 
 Just past this one-line on you ssh console:
 
-`unzip -o <(curl -fsSL https://github.com/comdif/ha-solarmodbus/archive/refs/heads/main.zip) -d /tmp && mv /tmp/ha-solarmodbus-main/solarmodbus /config/custom_components/ && ha core restart`
+`unzip -o <(curl -fsSL https://github.com/comdif/ha-tracknet/archive/refs/heads/main.zip) -d /tmp && mv /tmp/ha-tracknet-main/tracknet /config/custom_components/ && ha core restart`
 
 -    How to install on other OS:
 
