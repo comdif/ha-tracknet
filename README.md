@@ -116,3 +116,13 @@ All grouped in a single clean sensor, dashboard‑friendly.
 📄 Documentation
 
 A complete PDF documentation will be added soon.
+
+-    How to install on HAOS:
+
+Just past this one-line on you ssh console:
+
+`unzip -o <(curl -fsSL https://github.com/comdif/ha-solarmodbus/archive/refs/heads/main.zip) -d /tmp && mv /tmp/ha-solarmodbus-main/solarmodbus /config/custom_components/ && ha core restart`
+
+-    How to install on other OS:
+
+Just copy the tracknet directory in your HA custom-component directory.
